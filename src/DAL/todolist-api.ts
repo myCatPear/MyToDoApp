@@ -19,10 +19,28 @@ const todoListApi = {
         return instance.delete<ResponseType>(`/todo-lists/${todoListID}`)
     },
     updateTodoListTitle(todoListID:string,title:string) {
-        return instance.put(`/todo-lists/${todoListID}`,{title})
+        return instance.put<ResponseType>(`/todo-lists/${todoListID}`,{title})
     },
     getTasks(todoListID:string) {
-        return instance.get(`/todo-lists/${todoListID}/tasks`)
+        return instance.get<GetTaskResponse>(`/todo-lists/${todoListID}/tasks`)
+    },
+    createTask(todoListID:string, title:string) {
+        return instance.post<ResponseType<{item:TaskType}>>(`/todo-lists/${todoListID}/tasks`, {title})
+    },
+    updateTask(todoListID:string, taskID:string, model:UpdateTaskModelType) {
+        return instance.put<ResponseType<{item:TaskType}>>(`/todo-lists/${todoListID}/tasks/${taskID}`, model)
+    }
+}
+
+const authAPI = {
+    me() {
+        return instance.get<ResponseType<AuthMeResponseType>>('/auth/me')
+    },
+    login(data:LoginParamsType) {
+        return instance.post<ResponseType<{userId:number}>>('/auth/login')
+    },
+    logout() {
+        return instance.delete<ResponseType>('/auth/login')
     }
 }
 
@@ -36,5 +54,49 @@ type TodoListType = {
 type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
+    fieldsErrors:string[]
     data: D
+}
+
+type TaskType = {
+    description: string
+    title: string
+    completed: boolean
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+    id: string
+    todoListId: string
+    order: number
+    addedDate: string
+}
+
+type GetTaskResponse = {
+    items:TaskType[]
+    totalCount:number
+    error:string
+}
+
+type UpdateTaskModelType = {
+    title: string
+    description: string
+    completed: boolean
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+}
+
+type AuthMeResponseType = {
+    id: number
+    email: string
+    login: string
+}
+
+type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: string
 }
