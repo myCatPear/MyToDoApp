@@ -32,12 +32,12 @@ const todoListApi = {
     }
 }
 
-const authAPI = {
+export const authAPI = {
     me() {
         return instance.get<ResponseType<AuthMeResponseType>>('/auth/me')
     },
     login(data:LoginParamsType) {
-        return instance.post<ResponseType<{userId:number}>>('/auth/login')
+        return instance.post<ResponseType<{userId:number}>>('/auth/login',data)
     },
     logout() {
         return instance.delete<ResponseType>('/auth/login')
@@ -94,9 +94,9 @@ type AuthMeResponseType = {
     login: string
 }
 
-type LoginParamsType = {
+export type LoginParamsType = {
     email: string
     password: string
     rememberMe: boolean
-    captcha: string
+    captcha?: string
 }

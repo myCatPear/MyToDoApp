@@ -1,7 +1,11 @@
 import {useFormik} from 'formik';
 import React from 'react';
+import {useAppDispatch} from "../../hooks/hooks";
+import {loginTC} from "../../BLL/auth-reducer";
 
 const Login = () => {
+    const dispatch = useAppDispatch()
+
     type FormikErrorType = {
         email?: string
         password?: string
@@ -27,7 +31,8 @@ const Login = () => {
             return errors;
         },
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            console.log(values)
+            dispatch(loginTC(values))
         },
     });
     return (
