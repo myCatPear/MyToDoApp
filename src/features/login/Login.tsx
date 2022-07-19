@@ -1,9 +1,12 @@
 import {useFormik} from 'formik';
 import React from 'react';
-import {useAppDispatch} from "../../hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {loginTC} from "../../BLL/auth-reducer";
+import { Navigate } from 'react-router-dom';
 
 const Login = () => {
+    const isLogin = useAppSelector(state => state.auth.isLoginIn)
+
     const dispatch = useAppDispatch()
 
     type FormikErrorType = {
@@ -31,10 +34,13 @@ const Login = () => {
             return errors;
         },
         onSubmit: values => {
-            console.log(values)
             dispatch(loginTC(values))
         },
     });
+    if (isLogin) {
+        return <Navigate to={'/'}/>
+    }
+
     return (
         <form onSubmit={formik.handleSubmit}>
             <label htmlFor="email">Email Address</label>

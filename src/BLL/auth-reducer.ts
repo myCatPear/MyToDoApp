@@ -1,5 +1,7 @@
 import {AppThunk} from "./store";
 import {authAPI, LoginParamsType} from "../DAL/todolist-api";
+import {setAppStatusAC, setAppErrorAC} from "./app-reducer";
+import {AxiosError} from "axios";
 
 const SET_IS_LOGIN_IN = 'AUTH/SET_IS_LOGIN_IN'
 
@@ -32,12 +34,22 @@ export const setIsLoginInAC = (value: boolean) => {
 type setIsLoginInACType = ReturnType<typeof setIsLoginInAC>
 
 export const loginTC = (data:LoginParamsType): AppThunk => (dispatch) => {
-
+    dispatch(setAppStatusAC('loading'))
     authAPI.login(data)
         .then((res) => {
-            console.log(res.data)
+            if (res.data.resultCode === 0) {
+                dispatch(setIsLoginInAC(true))
+            } else {
+                if (res.data.messages) {
+                    dispatch(setAppErrorAC(res.data.messages[0]))
+                } else {
+                    dispatch(setAppErrorAC('Some error occured'))
+                }
+            }
+            dispatch(setAppStatusAC('idle'))
         })
         .catch((err)=> {
-            console.log(err)
+            dispatch(setAppErrorAC(err.message ? err.message : 'Some error occured'))
+            dispatch(setAppStatusAC('failed'))
         })
 }
