@@ -8,7 +8,7 @@ const instance = axios.create({
     }
 })
 
-const todoListApi = {
+export const todoListApi = {
     getTodoList() {
         return instance.get<TodoListType[]>('/todo-lists')
     },
@@ -44,7 +44,7 @@ export const authAPI = {
     }
 }
 
-type TodoListType = {
+export type TodoListType = {
     id: string
     addedDate: string
     order: number
@@ -58,7 +58,7 @@ type ResponseType<D = {}> = {
     data: D
 }
 
-type TaskType = {
+export type TaskType = {
     description: string
     title: string
     completed: boolean

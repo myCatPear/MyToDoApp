@@ -39,6 +39,7 @@ export const loginTC = (data:LoginParamsType): AppThunk => (dispatch) => {
         .then((res) => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoginInAC(true))
+                dispatch(setAppStatusAC('succeed'))
             } else {
                 if (res.data.messages) {
                     dispatch(setAppErrorAC(res.data.messages[0]))

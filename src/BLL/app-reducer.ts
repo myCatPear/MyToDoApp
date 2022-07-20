@@ -1,6 +1,9 @@
+import {AppThunk} from "./store";
+import {authAPI} from "../DAL/todolist-api";
+import {setIsLoginInAC} from "./auth-reducer";
+
 const SET_APP_STATUS = 'APP/SET_APP_REQUEST_STATUS'
 const SET_APP_ERROR = 'APP/SET_APP_ERROR'
-const SET_APP_IS_INITIALIZED = 'APP/SET_APP_IS_INITIALIZED'
 
 const initialState: InitialStateType = {
     status: 'idle',
@@ -22,8 +25,6 @@ export const appReducer = (state: InitialStateType = initialState, action: AppAc
             return {...state, status: action.status}
         case SET_APP_ERROR:
             return {...state, error: action.error}
-        case SET_APP_IS_INITIALIZED:
-            return {...state, isInitialized:action.value}
         default:
             return state
     }
@@ -31,7 +32,7 @@ export const appReducer = (state: InitialStateType = initialState, action: AppAc
 
 export type AppActionsType = setAppStatusACType
     | setErrorACType
-    | setInitializedACType
+
 
 export const setAppStatusAC = (status: AppRequestStatusType) => ({type: SET_APP_STATUS, status,} as const)
 
@@ -41,9 +42,21 @@ export const setAppErrorAC = (error: string | null) => ({type: SET_APP_ERROR, er
 
 type setErrorACType = ReturnType<typeof setAppErrorAC>
 
-export const setAppInitializedAC = (value: boolean) => ({type: SET_APP_IS_INITIALIZED, value} as const)
 
-type setInitializedACType = ReturnType<typeof setAppInitializedAC>
+export const isInitializedTC = ():AppThunk => (dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    authAPI.me()
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(setIsLoginInAC(true))
+                dispatch(setAppStatusAC('succeed'))
+            }
+        })
+        .catch((err) => {
+            dispatch(setAppErrorAC(err.message ? err.message : 'Some error occured'))
+            dispatch(setAppStatusAC('failed'))
+        })
+}
 
 
 
