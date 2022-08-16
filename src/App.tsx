@@ -1,35 +1,33 @@
+import React, { useEffect } from 'react';
+
 import LinearProgress from '@mui/material/LinearProgress/LinearProgress';
-import React, {useEffect} from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+
 import './App.css';
-import ErrorSnackBar from './components/SnackBar/ErrorSnackBar';
-import Login from './features/login/Login';
-import {useAppDispatch, useAppSelector} from "./hooks/hooks";
-import {ButtonAppBar} from "./components/AppBar/AppBar";
-import {Page404} from "./components/PAGE404/PAGE404";
-import {isInitializedTC} from "./BLL/app-reducer";
-import {TodoListsList} from "./features/TodoListsList/TodoListsList";
+import { isInitializedTC } from 'BLL/app-reducer';
+import { MyAppBar, ErrorSnackBar } from 'components';
+import { Login, TodoListsList } from 'features';
+import { useAppDispatch, useAppSelector } from 'hooks/hooks';
 
+export const App: React.FC = () => {
+  console.log('app rendering');
+  const status = useAppSelector(state => state.app.status);
+  const dispatch = useAppDispatch();
 
-function App() {
-    const status = useAppSelector(state => state.app.status)
-    const dispatch = useAppDispatch()
-    useEffect(() => {
-        dispatch(isInitializedTC())
-    },[])
+  useEffect(() => {
+    dispatch(isInitializedTC());
+  }, [dispatch]);
 
-    return (
-        <>
-            <ButtonAppBar/>
-            {status ===  'loading' &&  <LinearProgress />}
-           <ErrorSnackBar/>
-            <Routes>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/" element={<TodoListsList/>}/>
-                <Route path="*" element={<Page404/>}/>
-            </Routes>
-        </>
-    );
-}
-
-export default App;
+  return (
+    <>
+      <MyAppBar />
+      {status === 'loading' && <LinearProgress />}
+      <ErrorSnackBar />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<TodoListsList />} />
+        {/* <Route path="*" element={<Page404/>}/> */}
+      </Routes>
+    </>
+  );
+};

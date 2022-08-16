@@ -1,32 +1,44 @@
-import {todoListApi, TodoListType} from "../DAL/todolist-api";
-import {AppThunk} from "./store";
+import { AppThunk } from './store';
 
-export const SET_TODOLIST = 'TODOLIST/SET_TODOLIST'
+import { todoListApi, TodoListType } from 'DAL/todolist-api';
 
-const initialState:TodoListType[] = []
+export const SET_TODOLIST = 'TODOLIST/SET_TODOLIST';
 
-export const todolistReducer = (state: TodoListType[] = initialState, action: TodoListActionsType):TodoListType[] => {
-    switch (action.type) {
-        case SET_TODOLIST:
-            return [...action.todolists]
-        default:
-            return state
-    }
-}
+type InitialStateType = TodoListType[];
 
-export type TodoListActionsType = setTodoListsACType
+const initialState: InitialStateType = [];
 
-//ACTIONS
+export const todolistReducer = (
+  state: InitialStateType = initialState,
+  action: TodoListActionsType,
+): InitialStateType => {
+  switch (action.type) {
+    case SET_TODOLIST:
+      return [...action.todolists];
+    default:
+      return state;
+  }
+};
 
-export const setTodoListsAC = (todolists:TodoListType[]) => ({type:SET_TODOLIST, todolists} as const)
+export type TodoListActionsType = setTodoListsACType;
 
-export type setTodoListsACType = ReturnType<typeof setTodoListsAC>
+// ACTIONS
 
-//THUNK
+export const setTodoListsAC = (todolists: TodoListType[]) =>
+  ({ type: SET_TODOLIST, todolists } as const);
+export type setTodoListsACType = ReturnType<typeof setTodoListsAC>;
 
-export const getTodoListsTC = ():AppThunk => (dispatch) => {
-    todoListApi.getTodoList()
-        .then((res) => {
-            dispatch(setTodoListsAC(res.data))
-        })
-}
+// THUNK
+
+export const getTodoListsTC = (): AppThunk => dispatch => {
+  todoListApi.getTodoList().then(res => {
+    dispatch(setTodoListsAC(res.data));
+
+    return res.data;
+  });
+  // .then((todolists) => {
+  //     todolists.forEach((tl) => {
+  //         dispatch(getTasksTC(tl.id))
+  //     })
+  // })
+};

@@ -1,25 +1,16 @@
-import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
-import {getTasksTC} from "../../../../BLL/task-reducer";
-import {TaskType} from "../../../../DAL/todolist-api";
-import {getTodoListsTC} from "../../../../BLL/todolist-reducer";
+import React from 'react';
+
+import { TaskType } from 'DAL/todolist-api';
 
 type TasksPropsType = {
-    todolistID:string
-    task:TaskType
-}
-
-export const Task:React.FC<TasksPropsType> = (props) => {
-    const {
-        todolistID,
-        task
-    } = props
-
-
-
-
-    const dispatch = useAppDispatch()
-    return (
-       <div>{task.title}</div>
-    );
+  todolistID: string;
+  task: TaskType;
 };
+
+export const Task = React.memo((props: TasksPropsType) => {
+  console.log('Task rendering');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { todolistID, task } = props;
+
+  return <div>{task.title}</div>;
+});
