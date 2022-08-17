@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
 
-import { useAppSelector } from 'hooks/hooks';
+import { useAppSelector } from 'common/hooks/hooks';
 
 export const MyAppBar: React.FC = () => {
   const isLogin = useAppSelector(state => state.auth.isLoginIn);

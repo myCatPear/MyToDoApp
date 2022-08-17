@@ -3,7 +3,8 @@ import { AxiosError } from 'axios';
 import { AppThunk } from './store';
 import { setTodoListsACType, SET_TODOLIST } from './todolist-reducer';
 
-import { TaskType, todoListApi } from 'DAL/todolist-api';
+import { taskApi } from 'DAL';
+import { TaskType } from 'DAL/taskAPI/types';
 
 const SET_TASKS = 'TASKS/SET_TASKS';
 
@@ -48,7 +49,7 @@ type setTasksACType = ReturnType<typeof setTasksAC>;
 export const getTasksTC =
   (todolistID: string): AppThunk =>
   dispatch => {
-    todoListApi
+    taskApi
       .getTasks(todolistID)
       .then(res => {
         dispatch(setTasksAC(todolistID, res.data.items));

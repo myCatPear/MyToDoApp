@@ -5,9 +5,9 @@ import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import { isInitializedTC } from 'BLL/app-reducer';
+import { useAppDispatch, useAppSelector } from 'common/hooks/hooks';
 import { MyAppBar, ErrorSnackBar } from 'components';
 import { Login, TodoListsList } from 'features';
-import { useAppDispatch, useAppSelector } from 'hooks/hooks';
 
 export const App: React.FC = () => {
   console.log('app rendering');

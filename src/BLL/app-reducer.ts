@@ -1,7 +1,9 @@
+import { Nullable } from '../common/types/Nullable';
+
 import { setIsLoginInAC } from './auth-reducer';
 import { AppThunk } from './store';
 
-import { authAPI } from 'DAL/auth-api';
+import { authAPI } from 'DAL';
 
 const SET_APP_STATUS = 'APP/SET_APP_REQUEST_STATUS';
 const SET_APP_ERROR = 'APP/SET_APP_ERROR';
@@ -14,7 +16,7 @@ const initialState: InitialStateType = {
 
 type InitialStateType = {
   status: AppRequestStatusType;
-  error: null | string;
+  error: Nullable<String>;
   isInitialized: boolean;
 };
 

@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { TodoList } from './TodoList';
 
 import { getTodoListsTC } from 'BLL/todolist-reducer';
+import { useAppDispatch, useAppSelector } from 'common/hooks/hooks';
 import { AddItemForm } from 'components';
-import { TodoListType } from 'DAL/todolist-api';
-import { useAppDispatch, useAppSelector } from 'hooks/hooks';
+import { TodoListType } from 'DAL/todolistAPI/types';
 
 export const TodoListsList: React.FC = () => {
   console.log('TodoListsList rendering');

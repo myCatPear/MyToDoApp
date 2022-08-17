@@ -1,6 +1,7 @@
 import { AppThunk } from './store';
 
-import { todoListApi, TodoListType } from 'DAL/todolist-api';
+import { todoListApi } from 'DAL';
+import { TodoListType } from 'DAL/todolistAPI/types';
 
 export const SET_TODOLIST = 'TODOLIST/SET_TODOLIST';
 

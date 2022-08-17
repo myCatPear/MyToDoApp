@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TaskType } from 'DAL/todolist-api';
+import { TaskType } from 'DAL/taskAPI/types';
 
 type TasksPropsType = {
   todolistID: string;

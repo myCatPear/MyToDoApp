@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { Task } from './Tasks';
 
 import { getTasksTC } from 'BLL/task-reducer';
-import { TaskType } from 'DAL/todolist-api';
-import { useAppDispatch } from 'hooks/hooks';
+import { useAppDispatch } from 'common/hooks/hooks';
+import { TaskType } from 'DAL/taskAPI/types';
 
 type TodoListPropsType = {
   todolistID: string;

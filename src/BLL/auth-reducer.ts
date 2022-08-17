@@ -1,8 +1,8 @@
 import { setAppStatusAC, setAppErrorAC } from './app-reducer';
 import { AppThunk } from './store';
 
-import { authAPI } from 'DAL/auth-api';
-import { LoginParamsType } from 'DAL/todolist-api';
+import { authAPI } from 'DAL';
+import { LoginParamsType } from 'DAL/authAPI/types';
 
 const SET_IS_LOGIN_IN = 'AUTH/SET_IS_LOGIN_IN';
 

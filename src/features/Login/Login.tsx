@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { Navigate } from 'react-router-dom';
 
 import { loginTC } from 'BLL/auth-reducer';
-import { useAppDispatch, useAppSelector } from 'hooks/hooks';
+import { useAppDispatch, useAppSelector } from 'common/hooks/hooks';
 
 export const Login: React.FC = () => {
   const isLogin = useAppSelector(state => state.auth.isLoginIn);
