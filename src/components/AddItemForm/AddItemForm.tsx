@@ -1,18 +1,33 @@
 import React from 'react';
 
 import { AddBox } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
-import TextField from '@mui/material/TextField/TextField';
+import { IconButton, TextField } from '@mui/material';
 
-// type AddItemFormPropsType = {
-//   title: string;
-// };
+import { useTextFieldHook } from 'common/hooks/useTextFieldHook';
 
-export const AddItemForm: React.FC = () => {
+type AddItemFormPropsType = {
+  onIconButtonClick: (title: string) => void;
+};
+
+export const AddItemForm: React.FC<AddItemFormPropsType> = props => {
+  const { onIconButtonClick } = props;
+
+  const { title, onTextFieldChange } = useTextFieldHook();
+
+  const onIconButtonHandlerClick = (): void => {
+    onIconButtonClick(title);
+  };
+
   return (
     <div>
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-      <IconButton>
+      <TextField
+        id="outlined-basic"
+        label="Title"
+        variant="outlined"
+        value={title}
+        onChange={onTextFieldChange}
+      />
+      <IconButton onClick={onIconButtonHandlerClick}>
         <AddBox />
       </IconButton>
     </div>

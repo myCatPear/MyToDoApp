@@ -1,46 +1,48 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 
-import Grid from '@mui/material/Grid/Grid';
-import Paper from '@mui/material/Paper/Paper';
+import { Grid, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import { TodoList } from './TodoList';
+import { getIsLogin, getTasks, getTodoLists } from '../../selectors';
 
 import { getTodoListsTC } from 'BLL/todolist-reducer';
-import { useAppDispatch, useAppSelector } from 'common/hooks/hooks';
+import { PATH_TO_LOGIN } from 'common/constants';
+import { useAppDispatch, useAppSelector } from 'common/hooks';
 import { AddItemForm } from 'components';
-import { TodoListType } from 'DAL/todolistAPI/types';
+import { TodoList } from 'features';
 
-export const TodoListsList: React.FC = () => {
+export const TodoListsList: FC = () => {
   console.log('TodoListsList rendering');
 
   const dispatch = useAppDispatch();
-  const todolists = useAppSelector<TodoListType[]>(state => state.todolists);
-  const tasks = useAppSelector(state => state.tasks);
-  const isLogin = useAppSelector(state => state.auth.isLoginIn);
+  const todolists = useAppSelector(getTodoLists);
+  const tasks = useAppSelector(getTasks);
+  const isLogin = useAppSelector(getIsLogin);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isLogin) {
       dispatch(getTodoListsTC());
     } else {
-      navigate('login');
+      navigate(PATH_TO_LOGIN);
     }
   }, [isLogin, dispatch, navigate]);
 
+  const handleIconButtonClick = (): void => {};
+
   return (
     <>
-      <AddItemForm />
+      <AddItemForm onIconButtonClick={handleIconButtonClick} />
       <Grid container spacing={3}>
-        {todolists.map(tl => {
+        {todolists.map(({ id, title }) => {
           return (
-            <Grid item key={tl.id}>
+            <Grid item key={id}>
               <Paper style={{ padding: '10px' }}>
                 <TodoList
-                  key={`${tl.id}`}
-                  todolistID={tl.id}
-                  todolistTitle={tl.title}
-                  tasks={tasks[tl.id]}
+                  key={`${id}`}
+                  todolistID={id}
+                  todolistTitle={title}
+                  tasks={tasks[id]}
                 />
               </Paper>
             </Grid>

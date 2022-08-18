@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 
 import { Task } from './Tasks';
 
 import { getTasksTC } from 'BLL/task-reducer';
-import { useAppDispatch } from 'common/hooks/hooks';
+import { useAppDispatch } from 'common/hooks';
 import { TaskType } from 'DAL/taskAPI/types';
 
 type TodoListPropsType = {
@@ -12,7 +12,7 @@ type TodoListPropsType = {
   tasks: TaskType[];
 };
 
-export const TodoList = React.memo((props: TodoListPropsType) => {
+export const TodoList = memo((props: TodoListPropsType) => {
   console.log('TodoList rendering');
 
   const { todolistID, todolistTitle, tasks } = props;
@@ -26,12 +26,12 @@ export const TodoList = React.memo((props: TodoListPropsType) => {
     <div>
       <h2>{todolistTitle}</h2>
       <div>
-        {tasks.map(t => {
+        {tasks.map(task => {
           return (
             <Task
               key={`${todolistID}-${Math.random()}`}
               todolistID={todolistID}
-              task={t}
+              task={task}
             />
           );
         })}

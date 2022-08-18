@@ -1,7 +1,7 @@
 import { GetTaskResponse, TaskType, UpdateTaskModelType } from './types';
 
+import { ResponseType } from 'common/types/ResponseType';
 import { apiConfig } from 'DAL';
-import { ResponseType } from 'DAL/types';
 
 export const taskApi = {
   getTasks(todoListID: string) {

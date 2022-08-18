@@ -1,14 +1,12 @@
 import * as React from 'react';
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Toolbar from '@mui/material/Toolbar';
+import { AppBar, Box, Button, Toolbar } from '@mui/material';
 
-import { useAppSelector } from 'common/hooks/hooks';
+import { useAppSelector } from 'common/hooks';
+import { getIsLogin } from 'selectors';
 
 export const MyAppBar: React.FC = () => {
-  const isLogin = useAppSelector(state => state.auth.isLoginIn);
+  const isLogin = useAppSelector(getIsLogin);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

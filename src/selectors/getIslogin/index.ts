@@ -1,0 +1,1 @@
+export { getIsLogin } from './getIsLogin';

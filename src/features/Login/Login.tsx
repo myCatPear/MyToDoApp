@@ -1,26 +1,28 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { useFormik } from 'formik';
 import { Navigate } from 'react-router-dom';
 
 import { loginTC } from 'BLL/auth-reducer';
-import { useAppDispatch, useAppSelector } from 'common/hooks/hooks';
+import { EMPTY_STRING, PATH_TO_TODOLISTS_LIST } from 'common/constants';
+import { useAppDispatch, useAppSelector } from 'common/hooks';
+import { getIsLogin } from 'selectors';
 
-export const Login: React.FC = () => {
-  const isLogin = useAppSelector(state => state.auth.isLoginIn);
+type FormikErrorType = {
+  email?: string;
+  password?: string;
+  rememberMe?: boolean;
+};
+
+export const Login: FC = () => {
+  const isLogin = useAppSelector(getIsLogin);
 
   const dispatch = useAppDispatch();
 
-  type FormikErrorType = {
-    email?: string;
-    password?: string;
-    rememberMe?: boolean;
-  };
-
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: EMPTY_STRING,
+      password: EMPTY_STRING,
       rememberMe: false,
     },
     validate: values => {
@@ -42,7 +44,7 @@ export const Login: React.FC = () => {
   });
 
   if (isLogin) {
-    return <Navigate to="/" />;
+    return <Navigate to={PATH_TO_TODOLISTS_LIST} />;
   }
 
   return (

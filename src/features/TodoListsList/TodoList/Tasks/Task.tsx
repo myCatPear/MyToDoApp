@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { TaskType } from 'DAL/taskAPI/types';
 
@@ -7,7 +7,7 @@ type TasksPropsType = {
   task: TaskType;
 };
 
-export const Task = React.memo((props: TasksPropsType) => {
+export const Task = memo((props: TasksPropsType) => {
   console.log('Task rendering');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { todolistID, task } = props;
