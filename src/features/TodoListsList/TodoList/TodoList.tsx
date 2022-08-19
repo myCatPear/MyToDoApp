@@ -1,5 +1,10 @@
 import React, { memo, useEffect } from 'react';
 
+import { Delete } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
+
+import { deleteTodolistTC } from '../../../BLL/todolist-reducer';
+
 import { Task } from './Tasks';
 
 import { getTasksTC } from 'BLL/task-reducer';
@@ -22,9 +27,16 @@ export const TodoList = memo((props: TodoListPropsType) => {
     dispatch(getTasksTC(todolistID));
   }, [dispatch, todolistID]);
 
+  const onIconButtonClick = (): void => {
+    dispatch(deleteTodolistTC(todolistID));
+  };
+
   return (
     <div>
       <h2>{todolistTitle}</h2>
+      <IconButton onClick={onIconButtonClick}>
+        <Delete />
+      </IconButton>
       <div>
         {tasks.map(task => {
           return (

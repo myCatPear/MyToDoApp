@@ -5,6 +5,7 @@ import { EMPTY_STRING } from 'common/constants';
 type useTextFieldHookType = {
   title: string;
   onTextFieldChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  setTitle: (title: string) => void;
 };
 
 export const useTextFieldHook = (): useTextFieldHookType => {
@@ -16,5 +17,5 @@ export const useTextFieldHook = (): useTextFieldHookType => {
     setTitle(event.currentTarget.value);
   };
 
-  return { title, onTextFieldChange };
+  return { title, onTextFieldChange, setTitle };
 };

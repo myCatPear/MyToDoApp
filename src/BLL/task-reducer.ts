@@ -1,7 +1,14 @@
 import { AxiosError } from 'axios';
 
 import { AppThunk } from './store';
-import { setTodoListsACType, SET_TODOLIST } from './todolist-reducer';
+import {
+  CREATE_TODOLIST,
+  createTodoListsACType,
+  DELETE_TODOLIST,
+  deleteTodoListsACType,
+  SET_TODOLIST,
+  setTodoListsACType,
+} from './todolist-reducer';
 
 import { taskApi } from 'DAL';
 import { TaskType } from 'DAL/taskAPI/types';
@@ -30,6 +37,15 @@ export const taskReducer = (
 
       return copyState;
     }
+    case CREATE_TODOLIST:
+      return { ...state, [action.todolist.id]: [] };
+    case DELETE_TODOLIST: {
+      const copyState = { ...state };
+
+      delete copyState[action.todolistID];
+
+      return copyState;
+    }
 
     default:
       return state;
@@ -38,7 +54,11 @@ export const taskReducer = (
 
 // ACTIONS
 
-export type TaskActionsType = setTasksACType | setTodoListsACType;
+export type TaskActionsType =
+  | setTasksACType
+  | setTodoListsACType
+  | createTodoListsACType
+  | deleteTodoListsACType;
 
 export const setTasksAC = (todolistID: string, tasks: TaskType[]) =>
   ({ type: SET_TASKS, todolistID, tasks } as const);

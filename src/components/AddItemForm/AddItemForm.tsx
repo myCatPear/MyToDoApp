@@ -12,10 +12,11 @@ type AddItemFormPropsType = {
 export const AddItemForm: React.FC<AddItemFormPropsType> = props => {
   const { onIconButtonClick } = props;
 
-  const { title, onTextFieldChange } = useTextFieldHook();
+  const { title, onTextFieldChange, setTitle } = useTextFieldHook();
 
   const onIconButtonHandlerClick = (): void => {
     onIconButtonClick(title);
+    setTitle('');
   };
 
   return (

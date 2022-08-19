@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { getIsLogin, getTasks, getTodoLists } from '../../selectors';
 
-import { getTodoListsTC } from 'BLL/todolist-reducer';
+import { createTodolistTC, fetchTodoListsTC } from 'BLL/todolist-reducer';
 import { PATH_TO_LOGIN } from 'common/constants';
 import { useAppDispatch, useAppSelector } from 'common/hooks';
 import { AddItemForm } from 'components';
@@ -22,13 +22,15 @@ export const TodoListsList: FC = () => {
 
   useEffect(() => {
     if (isLogin) {
-      dispatch(getTodoListsTC());
+      dispatch(fetchTodoListsTC());
     } else {
       navigate(PATH_TO_LOGIN);
     }
   }, [isLogin, dispatch, navigate]);
 
-  const handleIconButtonClick = (): void => {};
+  const handleIconButtonClick = (title: string): void => {
+    dispatch(createTodolistTC(title));
+  };
 
   return (
     <>
