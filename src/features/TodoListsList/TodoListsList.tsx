@@ -28,13 +28,13 @@ export const TodoListsList: FC = () => {
     }
   }, [isLogin, dispatch, navigate]);
 
-  const handleIconButtonClick = (title: string): void => {
+  const handleIconButtonAddBoxClick = (title: string): void => {
     dispatch(createTodolistTC(title));
   };
 
   return (
     <>
-      <AddItemForm onIconButtonClick={handleIconButtonClick} />
+      <AddItemForm onIconButtonClick={handleIconButtonAddBoxClick} />
       <Grid container spacing={3}>
         {todolists.map(({ id, title }) => {
           return (

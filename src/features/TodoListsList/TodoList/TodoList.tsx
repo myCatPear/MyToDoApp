@@ -4,10 +4,11 @@ import { Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 
 import { deleteTodolistTC } from '../../../BLL/todolist-reducer';
+import { AddItemForm } from '../../../components';
 
 import { Task } from './Tasks';
 
-import { getTasksTC } from 'BLL/task-reducer';
+import { createTaskTC, fetchTasksTC } from 'BLL/task-reducer';
 import { useAppDispatch } from 'common/hooks';
 import { TaskType } from 'DAL/taskAPI/types';
 
@@ -24,19 +25,29 @@ export const TodoList = memo((props: TodoListPropsType) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getTasksTC(todolistID));
+    dispatch(fetchTasksTC(todolistID));
   }, [dispatch, todolistID]);
 
-  const onIconButtonClick = (): void => {
+  const onIconButtonDeleteClick = (): void => {
     dispatch(deleteTodolistTC(todolistID));
+  };
+
+  const handleIconButtonAddBoxClick = (title: string): void => {
+    dispatch(createTaskTC(todolistID, title));
   };
 
   return (
     <div>
-      <h2>{todolistTitle}</h2>
-      <IconButton onClick={onIconButtonClick}>
-        <Delete />
-      </IconButton>
+      <div>
+        <h2>{todolistTitle}</h2>
+        <IconButton onClick={onIconButtonDeleteClick}>
+          <Delete />
+        </IconButton>
+      </div>
+      <div>
+        <AddItemForm onIconButtonClick={handleIconButtonAddBoxClick} />
+      </div>
+
       <div>
         {tasks.map(task => {
           return (

@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 
+import { setAppErrorAC, setAppStatusAC } from './app-reducer';
 import { AppThunk } from './store';
 import {
   CREATE_TODOLIST,
@@ -14,6 +15,7 @@ import { taskApi } from 'DAL';
 import { TaskType } from 'DAL/taskAPI/types';
 
 const SET_TASKS = 'TASKS/SET_TASKS';
+const CREATE_TASKS = 'TASKS/CREATE_TASKS';
 
 export type TasksStateType = {
   [key: string]: Array<TaskType>;
@@ -46,37 +48,66 @@ export const taskReducer = (
 
       return copyState;
     }
+    case CREATE_TASKS:
+      return {
+        ...state,
+        [action.todolistID]: [action.task, ...state[action.todolistID]],
+      };
 
     default:
       return state;
   }
 };
 
-// ACTIONS
-
 export type TaskActionsType =
   | setTasksACType
   | setTodoListsACType
   | createTodoListsACType
-  | deleteTodoListsACType;
+  | deleteTodoListsACType
+  | createTasksACType;
+
+// ACTIONS
 
 export const setTasksAC = (todolistID: string, tasks: TaskType[]) =>
   ({ type: SET_TASKS, todolistID, tasks } as const);
 type setTasksACType = ReturnType<typeof setTasksAC>;
 
+export const createTasksAC = (todolistID: string, task: TaskType) =>
+  ({ type: CREATE_TASKS, todolistID, task } as const);
+type createTasksACType = ReturnType<typeof createTasksAC>;
+
 // THUNK
 
-export const getTasksTC =
+export const fetchTasksTC =
   (todolistID: string): AppThunk =>
   dispatch => {
+    dispatch(setAppStatusAC('loading'));
     taskApi
       .getTasks(todolistID)
       .then(res => {
         dispatch(setTasksAC(todolistID, res.data.items));
+        dispatch(setAppStatusAC('succeed'));
       })
       .catch((err: AxiosError<{ error: string }>) => {
         const error = err.response ? err.response.data.error : err.message;
 
-        console.log('error: ', error);
+        dispatch(setAppErrorAC(error));
+        dispatch(setAppStatusAC('failed'));
+      });
+  };
+
+export const createTaskTC =
+  (todolistID: string, title: string): AppThunk =>
+  dispatch => {
+    dispatch(setAppStatusAC('loading'));
+    taskApi
+      .createTask(todolistID, title)
+      .then(task => {
+        dispatch(createTasksAC(todolistID, task.data.data.item));
+        dispatch(setAppStatusAC('succeed'));
+      })
+      .catch(err => {
+        dispatch(setAppErrorAC(err.message));
+        dispatch(setAppStatusAC('failed'));
       });
   };
