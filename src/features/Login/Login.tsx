@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useFormik } from 'formik';
 import { Navigate } from 'react-router-dom';
 
-import { loginTC } from 'BLL/auth-reducer';
+import { loginTC } from 'BLL/reducers/authReducer/thunks';
 import { EMPTY_STRING, PATH_TO_TODOLISTS_LIST } from 'common/constants';
 import { useAppDispatch, useAppSelector } from 'common/hooks';
 import { getIsLogin } from 'selectors';

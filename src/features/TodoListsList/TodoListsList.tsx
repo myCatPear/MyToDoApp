@@ -3,13 +3,12 @@ import React, { FC, useEffect } from 'react';
 import { Grid, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import { getIsLogin, getTasks, getTodoLists } from '../../selectors';
-
-import { createTodolistTC, fetchTodoListsTC } from 'BLL/todolist-reducer';
+import { createTodolistTC, fetchTodoListsTC } from 'BLL/reducers/todolistReducer/thunks';
 import { PATH_TO_LOGIN } from 'common/constants';
 import { useAppDispatch, useAppSelector } from 'common/hooks';
 import { AddItemForm } from 'components';
 import { TodoList } from 'features';
+import { getIsLogin, getTasks, getTodoLists } from 'selectors';
 
 export const TodoListsList: FC = () => {
   console.log('TodoListsList rendering');

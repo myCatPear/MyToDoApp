@@ -1,5 +1,4 @@
-import { TasksStateType } from '../../BLL/task-reducer';
+import { InitialStateType } from 'BLL/reducers/taskReducer/types';
+import { RootStateType } from 'BLL/store/types';
 
-import { RootStateType } from 'BLL/store';
-
-export const getTasks = (state: RootStateType): TasksStateType => state.tasks;
+export const getTasks = (state: RootStateType): InitialStateType => state.tasks;

@@ -1,1 +1,1 @@
-export { apiConfig } from './api-config';
+export { apiConfig } from './apiConfig';

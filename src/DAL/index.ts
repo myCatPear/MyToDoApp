@@ -1,4 +1,4 @@
-export { authAPI } from './authAPI';
+export { authApi } from './authAPI';
 export { apiConfig } from './apiConfig';
-export { todoListApi } from './todolistAPI';
+export { todolistApi } from './todolistAPI';
 export { taskApi } from './taskAPI';

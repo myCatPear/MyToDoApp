@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
 
-import { AppDispatch } from 'BLL/store';
+import { AppDispatch } from 'common/types';
 
 export const useAppDispatch: () => AppDispatch = useDispatch;

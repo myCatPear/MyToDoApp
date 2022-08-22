@@ -7,7 +7,7 @@ import './App.css';
 
 import { useAppDispatch, useAppSelector } from './common/hooks';
 
-import { isInitializedTC } from 'BLL/app-reducer';
+import { isInitializedTC } from 'BLL/reducers/appReducer/thunks';
 import {
   PATH_TO_LOGIN,
   PATH_TO_TODOLISTS_LIST,

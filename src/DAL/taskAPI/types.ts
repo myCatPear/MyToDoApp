@@ -1,7 +1,6 @@
 export type TaskType = {
   description: string;
   title: string;
-  completed: boolean;
   status: number;
   priority: number;
   startDate: string;
@@ -21,7 +20,6 @@ export type GetTaskResponse = {
 export type UpdateTaskModelType = {
   title: string;
   description: string;
-  completed: boolean;
   status: number;
   priority: number;
   startDate: string;
