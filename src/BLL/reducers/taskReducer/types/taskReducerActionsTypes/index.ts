@@ -3,16 +3,16 @@ import { DeleteTasksACType } from 'BLL/reducers/taskReducer/types/deleteTasksACT
 import { SetTasksACType } from 'BLL/reducers/taskReducer/types/setTasksACType';
 import { UpdateTasksACType } from 'BLL/reducers/taskReducer/types/updateTasksACType';
 import {
-  CreateTodoListsACType,
-  DeleteTodoListsACType,
+  CreateTodoListACType,
+  DeleteTodoListACType,
   SetTodoListsACType,
 } from 'BLL/reducers/todolistReducer/types';
 
 export type TaskReducerActionsType =
   | SetTasksACType
   | SetTodoListsACType
-  | CreateTodoListsACType
-  | DeleteTodoListsACType
+  | CreateTodoListACType
+  | DeleteTodoListACType
   | CreateTasksACType
   | DeleteTasksACType
   | UpdateTasksACType;

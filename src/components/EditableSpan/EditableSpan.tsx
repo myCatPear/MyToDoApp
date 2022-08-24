@@ -1,27 +1,37 @@
-import React, { FC, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 
 import { TextField } from '@mui/material';
 
-import { useTextFieldHook } from '../../common/hooks';
+type EditableSpanPropsType = {
+  title: string;
+  changeTitle: (newTitle: string) => void;
+};
 
-export const EditableSpan: FC = () => {
+export const EditableSpan: FC<EditableSpanPropsType> = props => {
+  const { title, changeTitle } = props;
   const [isEditMode, setEditMode] = useState<boolean>(false);
-  const { title, onTextFieldChange } = useTextFieldHook();
+  const [currentTitle, setCurrentTitle] = useState<string>(title);
 
   const onSpanDoubleClick = (): void => setEditMode(true);
-  const onTextFieldBlur = (): void => setEditMode(false);
+  const onTextFieldBlur = (): void => {
+    setEditMode(false);
+    changeTitle(currentTitle);
+  };
+  const onTextFieldChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ): void => setCurrentTitle(event.currentTarget.value);
 
   return (
     <div>
       {isEditMode ? (
         <TextField
-          value={title}
+          value={currentTitle}
           onChange={onTextFieldChange}
           onBlur={onTextFieldBlur}
           autoFocus
         />
       ) : (
-        <span onDoubleClick={onSpanDoubleClick}>span</span>
+        <span onDoubleClick={onSpanDoubleClick}>{currentTitle}</span>
       )}
     </div>
   );

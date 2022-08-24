@@ -3,12 +3,14 @@ import React, { memo, useEffect } from 'react';
 import { Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 
+import { updateTodolistTitleTC } from '../../../BLL/reducers/todolistReducer/thunks/updateTodolistTitleTC';
+
 import { Task } from './Tasks';
 
 import { createTaskTC, fetchTasksTC } from 'BLL/reducers/taskReducer/thunks';
 import { deleteTodolistTC } from 'BLL/reducers/todolistReducer/thunks';
 import { useAppDispatch } from 'common/hooks';
-import { AddItemForm } from 'components';
+import { AddItemForm, EditableSpan } from 'components';
 import { TaskType } from 'DAL/taskAPI/types';
 
 type TodoListPropsType = {
@@ -35,16 +37,20 @@ export const TodoList = memo((props: TodoListPropsType) => {
     dispatch(createTaskTC(todolistID, title));
   };
 
+  const handleChangeTitle = (title: string): void => {
+    dispatch(updateTodolistTitleTC(todolistID, title));
+  };
+
   return (
     <div>
       <div>
-        <h2>{todolistTitle}</h2>
+        <EditableSpan title={todolistTitle} changeTitle={handleChangeTitle} />
         <IconButton onClick={onIconButtonDeleteClick}>
           <Delete />
         </IconButton>
       </div>
       <div>
-        <AddItemForm onIconButtonClick={handleIconButtonAddBoxClick} />
+        <AddItemForm onIconButtonAddBoxClick={handleIconButtonAddBoxClick} />
       </div>
 
       <div>

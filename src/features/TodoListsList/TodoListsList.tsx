@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { createTodolistTC, fetchTodoListsTC } from 'BLL/reducers/todolistReducer/thunks';
 import { PATH_TO_LOGIN } from 'common/constants';
 import { useAppDispatch, useAppSelector } from 'common/hooks';
-import { AddItemForm, EditableSpan } from 'components';
+import { AddItemForm } from 'components';
 import { TodoList } from 'features';
 import { getIsLogin, getTasks, getTodoLists } from 'selectors';
 
@@ -33,7 +33,7 @@ export const TodoListsList: FC = () => {
 
   return (
     <>
-      <AddItemForm onIconButtonClick={handleIconButtonAddBoxClick} />
+      <AddItemForm onIconButtonAddBoxClick={handleIconButtonAddBoxClick} />
       <Grid container spacing={3}>
         {todolists.map(({ id, title }) => {
           return (
@@ -50,7 +50,6 @@ export const TodoListsList: FC = () => {
           );
         })}
       </Grid>
-      <EditableSpan />
     </>
   );
 };

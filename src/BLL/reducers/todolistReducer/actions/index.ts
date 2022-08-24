@@ -1,3 +1,4 @@
-export { createTodoListsAC } from './createTodoListsAC';
-export { deleteTodoListsAC } from './deleteTodoListsAC';
+export { createTodoListAC } from './createTodoListAC';
+export { deleteTodoListAC } from './deleteTodoListAC';
 export { setTodoListsAC } from './setTodoListsAC';
+export { updateTodoListTitleAC } from './updateTodoListTitleAC';
