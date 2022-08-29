@@ -1,3 +1,5 @@
+import { TaskStatus } from 'common/enum';
+
 export type TaskType = {
   description: string;
   title: string;
@@ -20,7 +22,7 @@ export type GetTaskResponse = {
 export type UpdateTaskModelType = {
   title: string;
   description: string;
-  status: number;
+  status: TaskStatus;
   priority: number;
   startDate: string;
   deadline: string;

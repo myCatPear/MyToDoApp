@@ -3,12 +3,13 @@ import React, { memo, useEffect } from 'react';
 import { Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 
-import { updateTodolistTitleTC } from '../../../BLL/reducers/todolistReducer/thunks/updateTodolistTitleTC';
-
 import { Task } from './Tasks';
 
 import { createTaskTC, fetchTasksTC } from 'BLL/reducers/taskReducer/thunks';
-import { deleteTodolistTC } from 'BLL/reducers/todolistReducer/thunks';
+import {
+  updateTodolistTitleTC,
+  deleteTodolistTC,
+} from 'BLL/reducers/todolistReducer/thunks';
 import { useAppDispatch } from 'common/hooks';
 import { AddItemForm, EditableSpan } from 'components';
 import { TaskType } from 'DAL/taskAPI/types';

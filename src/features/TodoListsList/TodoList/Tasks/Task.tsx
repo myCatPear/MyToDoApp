@@ -3,6 +3,8 @@ import React, { ChangeEvent, memo } from 'react';
 import { Delete } from '@mui/icons-material';
 import { Checkbox, IconButton } from '@mui/material';
 
+import { EditableSpan } from '../../../../components';
+
 import { deleteTaskTC, updateTaskTC } from 'BLL/reducers/taskReducer/thunks';
 import { TaskStatus } from 'common/enum';
 import { useAppDispatch } from 'common/hooks';
@@ -27,16 +29,20 @@ export const Task = memo((props: TasksPropsType) => {
 
   const onCheckboxChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const newCheckedValue = !event.currentTarget.checked;
-    const newStatus = newCheckedValue ? TaskStatus.New : TaskStatus.Completed;
+    const status = newCheckedValue ? TaskStatus.New : TaskStatus.Completed;
 
-    dispatch(updateTaskTC(todolistID, task.id, newStatus));
+    dispatch(updateTaskTC(todolistID, task.id, { status }));
+  };
+
+  const handleEditableSpanChangeTitle = (title: string): void => {
+    dispatch(updateTaskTC(todolistID, task.id, { title }));
   };
 
   return (
     <ul>
       <li>
         <Checkbox checked={isChecked} onChange={onCheckboxChange} />
-        {task.title}
+        <EditableSpan title={task.title} changeTitle={handleEditableSpanChangeTitle} />
         <IconButton onClick={onIconButtonDeleteClick}>
           <Delete />
         </IconButton>

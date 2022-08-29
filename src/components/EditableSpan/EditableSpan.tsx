@@ -21,18 +21,14 @@ export const EditableSpan: FC<EditableSpanPropsType> = props => {
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => setCurrentTitle(event.currentTarget.value);
 
-  return (
-    <div>
-      {isEditMode ? (
-        <TextField
-          value={currentTitle}
-          onChange={onTextFieldChange}
-          onBlur={onTextFieldBlur}
-          autoFocus
-        />
-      ) : (
-        <span onDoubleClick={onSpanDoubleClick}>{currentTitle}</span>
-      )}
-    </div>
+  return isEditMode ? (
+    <TextField
+      value={currentTitle}
+      onChange={onTextFieldChange}
+      onBlur={onTextFieldBlur}
+      autoFocus
+    />
+  ) : (
+    <span onDoubleClick={onSpanDoubleClick}>{title}</span>
   );
 };
