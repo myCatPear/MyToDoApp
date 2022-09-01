@@ -10,6 +10,7 @@ export const SET_TASKS = 'TASKS/SET_TASKS';
 export const CREATE_TASKS = 'TASKS/CREATE_TASKS';
 export const DELETE_TASKS = 'TASKS/DELETE_TASKS';
 export const UPDATE_TASKS = 'TASKS/UPDATE_TASKS';
+export const CHANGE_FILTER_TASKS = 'TASKS/CHANGE_FILTER_TASKS ';
 
 const initialState: InitialStateType = {};
 

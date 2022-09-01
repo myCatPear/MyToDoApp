@@ -1,4 +1,5 @@
+import { TodolistsInitialStateType } from 'BLL/reducers/todolistReducer/types';
 import { RootStateType } from 'BLL/store/types';
-import { TodoListType } from 'DAL/todolistAPI/types';
 
-export const getTodoLists = (state: RootStateType): TodoListType[] => state.todolists;
+export const getTodoLists = (state: RootStateType): TodolistsInitialStateType[] =>
+  state.todolists;

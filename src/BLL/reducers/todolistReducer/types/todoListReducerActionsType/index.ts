@@ -1,3 +1,4 @@
+import { ChangeTodolistFilterACType } from 'BLL/reducers/todolistReducer/types/changeTodolistFilterACType';
 import { CreateTodoListACType } from 'BLL/reducers/todolistReducer/types/createTodoListACType';
 import { DeleteTodoListACType } from 'BLL/reducers/todolistReducer/types/deleteTodoListACType';
 import { SetTodoListsACType } from 'BLL/reducers/todolistReducer/types/setTodoListsACType';
@@ -7,4 +8,5 @@ export type TodoListReducerActionsType =
   | SetTodoListsACType
   | CreateTodoListACType
   | DeleteTodoListACType
-  | UpdateTodolistTitleACType;
+  | UpdateTodolistTitleACType
+  | ChangeTodolistFilterACType;

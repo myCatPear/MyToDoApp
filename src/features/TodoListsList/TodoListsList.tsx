@@ -3,6 +3,9 @@ import React, { FC, useEffect } from 'react';
 import { Grid, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
+import { changeTodolistFilterAC } from '../../BLL/reducers/todolistReducer/actions';
+import { FilterTaskType } from '../../common/types';
+
 import { createTodolistTC, fetchTodoListsTC } from 'BLL/reducers/todolistReducer/thunks';
 import { PATH_TO_LOGIN } from 'common/constants';
 import { useAppDispatch, useAppSelector } from 'common/hooks';
@@ -31,19 +34,26 @@ export const TodoListsList: FC = () => {
     dispatch(createTodolistTC(title));
   };
 
+  const handleChangeFilterTasksButtonClick = (
+    todolistID: string,
+    filter: FilterTaskType,
+  ): void => {
+    dispatch(changeTodolistFilterAC(todolistID, filter));
+  };
+
   return (
     <>
       <AddItemForm onIconButtonAddBoxClick={handleIconButtonAddBoxClick} />
       <Grid container spacing={3}>
-        {todolists.map(({ id, title }) => {
+        {todolists.map(todolist => {
           return (
-            <Grid item key={id}>
+            <Grid item key={todolist.id}>
               <Paper style={{ padding: '10px' }}>
                 <TodoList
-                  key={`${id}`}
-                  todolistID={id}
-                  todolistTitle={title}
-                  tasks={tasks[id]}
+                  key={`${todolist.id}`}
+                  todolist={todolist}
+                  tasks={tasks[todolist.id]}
+                  onChangeFilterTasksButtonClick={handleChangeFilterTasksButtonClick}
                 />
               </Paper>
             </Grid>
