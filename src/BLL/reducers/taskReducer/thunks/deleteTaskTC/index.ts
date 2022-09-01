@@ -15,6 +15,7 @@ export const deleteTaskTC =
         dispatch(setAppStatusAC('idle'));
       })
       .catch(err => {
-        dispatch(setAppErrorAC(err.message));
+        dispatch(setAppErrorAC(err.message ? err.message : 'Some error occurred'));
+        dispatch(setAppStatusAC('failed'));
       });
   };

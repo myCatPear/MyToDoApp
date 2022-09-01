@@ -14,7 +14,7 @@ export const deleteTodolistTC =
         dispatch(setAppStatusAC('succeed'));
       })
       .catch(err => {
-        dispatch(setAppErrorAC(err.message));
+        dispatch(setAppErrorAC(err.message ? err.message : 'Some error occurred'));
         dispatch(setAppStatusAC('failed'));
       });
   };

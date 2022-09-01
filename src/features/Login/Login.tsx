@@ -1,5 +1,15 @@
 import React, { FC } from 'react';
 
+import {
+  Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  Grid,
+  TextField,
+} from '@mui/material';
 import { useFormik } from 'formik';
 import { Navigate } from 'react-router-dom';
 
@@ -48,21 +58,57 @@ export const Login: FC = () => {
   }
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="email">
-        Email Address
-        <input id="email" type="email" {...formik.getFieldProps('email')} />
-      </label>
-      {formik.errors.email && formik.touched.email && <div>{formik.errors.email}</div>}
-      <label htmlFor="password">
-        Password
-        <input id="password" type="password" {...formik.getFieldProps('password')} />
-      </label>
-      {formik.errors.password && formik.touched.password && (
-        <div>{formik.errors.password}</div>
-      )}
-      <input id="rememberMe" type="checkbox" {...formik.getFieldProps('rememberMe')} />
-      <button type="submit">Submit</button>
-    </form>
+    <Grid container justifyContent="center">
+      <Grid item justifyContent="center">
+        <form onSubmit={formik.handleSubmit}>
+          <FormControl>
+            <FormLabel>
+              <p>
+                To log in get registered
+                <a
+                  href="https://social-network.samuraijs.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  here
+                </a>
+              </p>
+              <p>or use common test account credentials:</p>
+              <p>Email: free@samuraijs.com</p>
+              <p>Password: free</p>
+            </FormLabel>
+            <FormGroup>
+              <TextField
+                label="Email"
+                margin="normal"
+                {...formik.getFieldProps('email')}
+              />
+              {formik.touched.email && formik.errors.email && (
+                <div style={{ color: 'red' }}>{formik.errors.email}</div>
+              )}
+              <TextField
+                type="password"
+                label="Password"
+                margin="normal"
+                {...formik.getFieldProps('password')}
+              />
+              {formik.touched.password && formik.errors.password && (
+                <div style={{ color: 'red' }}>{formik.errors.password}</div>
+              )}
+              <FormControlLabel
+                label="Remember me"
+                control={<Checkbox />}
+                checked={formik.values.rememberMe}
+                {...formik.getFieldProps('rememberMe')}
+              />
+
+              <Button type="submit" variant="contained" color="primary">
+                Login
+              </Button>
+            </FormGroup>
+          </FormControl>
+        </form>
+      </Grid>
+    </Grid>
   );
 };

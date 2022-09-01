@@ -3,12 +3,11 @@ import React, { FC, useEffect } from 'react';
 import { Grid, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import { changeTodolistFilterAC } from '../../BLL/reducers/todolistReducer/actions';
-import { FilterTaskType } from '../../common/types';
-
+import { changeTodolistFilterAC } from 'BLL/reducers/todolistReducer/actions';
 import { createTodolistTC, fetchTodoListsTC } from 'BLL/reducers/todolistReducer/thunks';
 import { PATH_TO_LOGIN } from 'common/constants';
 import { useAppDispatch, useAppSelector } from 'common/hooks';
+import { FilterTaskType } from 'common/types';
 import { AddItemForm } from 'components';
 import { TodoList } from 'features';
 import { getIsLogin, getTasks, getTodoLists } from 'selectors';
@@ -43,8 +42,11 @@ export const TodoListsList: FC = () => {
 
   return (
     <>
-      <AddItemForm onIconButtonAddBoxClick={handleIconButtonAddBoxClick} />
-      <Grid container spacing={3}>
+      <Grid container style={{ padding: '20px' }}>
+        <AddItemForm onIconButtonAddBoxClick={handleIconButtonAddBoxClick} />
+      </Grid>
+
+      <Grid container spacing={3} style={{ padding: '20px' }}>
         {todolists.map(todolist => {
           return (
             <Grid item key={todolist.id}>

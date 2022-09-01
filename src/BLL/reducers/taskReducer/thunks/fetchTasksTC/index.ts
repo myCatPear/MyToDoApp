@@ -15,10 +15,8 @@ export const fetchTasksTC =
         dispatch(setTasksAC(todolistID, res.data.items));
         dispatch(setAppStatusAC('succeed'));
       })
-      .catch((err: AxiosError<{ error: string }>) => {
-        const error = err.response ? err.response.data.error : err.message;
-
-        dispatch(setAppErrorAC(error));
+      .catch(err => {
+        dispatch(setAppErrorAC(err.message ? err.message : 'Some error occurred'));
         dispatch(setAppStatusAC('failed'));
       });
   };

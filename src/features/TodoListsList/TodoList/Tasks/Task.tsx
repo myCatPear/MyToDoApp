@@ -3,11 +3,12 @@ import React, { ChangeEvent, memo } from 'react';
 import { Delete } from '@mui/icons-material';
 import { Checkbox, IconButton } from '@mui/material';
 
-import { EditableSpan } from '../../../../components';
+import s from './Task.module.scss';
 
 import { deleteTaskTC, updateTaskTC } from 'BLL/reducers/taskReducer/thunks';
 import { TaskStatus } from 'common/enum';
 import { useAppDispatch } from 'common/hooks';
+import { EditableSpan } from 'components';
 import { TaskType } from 'DAL/taskAPI/types';
 
 type TasksPropsType = {
@@ -39,7 +40,7 @@ export const Task = memo((props: TasksPropsType) => {
   };
 
   return (
-    <ul>
+    <ul className={s.task__list}>
       <li>
         <Checkbox checked={isChecked} onChange={onCheckboxChange} />
         <EditableSpan title={task.title} changeTitle={handleEditableSpanChangeTitle} />

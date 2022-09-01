@@ -34,8 +34,14 @@ export const updateTaskTC =
       ...domainModel,
     };
 
-    taskApi.updateTask(todolistID, taskID, apiModel).then(() => {
-      dispatch(updateTasksAC(todolistID, taskID, apiModel));
-      dispatch(setAppStatusAC('succeed'));
-    });
+    taskApi
+      .updateTask(todolistID, taskID, apiModel)
+      .then(() => {
+        dispatch(updateTasksAC(todolistID, taskID, apiModel));
+        dispatch(setAppStatusAC('succeed'));
+      })
+      .catch(err => {
+        dispatch(setAppErrorAC(err.message ? err.message : 'Some error occurred'));
+        dispatch(setAppStatusAC('failed'));
+      });
   };

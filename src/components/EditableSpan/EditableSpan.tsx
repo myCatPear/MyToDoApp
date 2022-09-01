@@ -2,6 +2,8 @@ import React, { ChangeEvent, FC, useState } from 'react';
 
 import { TextField } from '@mui/material';
 
+import s from './EditableSpa.module.scss';
+
 type EditableSpanPropsType = {
   title: string;
   changeTitle: (newTitle: string) => void;
@@ -27,6 +29,7 @@ export const EditableSpan: FC<EditableSpanPropsType> = props => {
       onChange={onTextFieldChange}
       onBlur={onTextFieldBlur}
       autoFocus
+      className={s.textField}
     />
   ) : (
     <span onDoubleClick={onSpanDoubleClick}>{title}</span>

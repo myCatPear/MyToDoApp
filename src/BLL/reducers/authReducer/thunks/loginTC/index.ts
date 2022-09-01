@@ -18,12 +18,12 @@ export const loginTC =
         } else if (res.data.messages) {
           dispatch(setAppErrorAC(res.data.messages[0]));
         } else {
-          dispatch(setAppErrorAC('Some error occured'));
+          dispatch(setAppErrorAC('Some error occurred'));
         }
         dispatch(setAppStatusAC('idle'));
       })
       .catch(err => {
-        dispatch(setAppErrorAC(err.message ? err.message : 'Some error occured'));
+        dispatch(setAppErrorAC(err.message ? err.message : 'Some error occurred'));
         dispatch(setAppStatusAC('failed'));
       });
   };

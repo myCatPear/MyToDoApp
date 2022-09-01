@@ -71,10 +71,12 @@ export const TodoList = memo((props: TodoListPropsType) => {
   return (
     <div>
       <div>
-        <EditableSpan title={todolist.title} changeTitle={handleChangeTitle} />
-        <IconButton onClick={onIconButtonDeleteClick}>
-          <Delete />
-        </IconButton>
+        <h3>
+          <EditableSpan title={todolist.title} changeTitle={handleChangeTitle} />
+          <IconButton onClick={onIconButtonDeleteClick}>
+            <Delete />
+          </IconButton>
+        </h3>
       </div>
       <div>
         <AddItemForm onIconButtonAddBoxClick={handleIconButtonAddBoxClick} />

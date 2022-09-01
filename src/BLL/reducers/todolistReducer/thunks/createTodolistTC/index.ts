@@ -14,7 +14,7 @@ export const createTodolistTC =
         dispatch(createTodoListAC(res.data.data.item));
       })
       .catch(err => {
-        dispatch(setAppErrorAC(err.message));
+        dispatch(setAppErrorAC(err.message ? err.message : 'Some error occurred'));
         dispatch(setAppStatusAC('failed'));
       });
   };
