@@ -1,15 +1,15 @@
-import { AuthReducerActionsType, InitialStateType } from './types';
+import { AuthReducerActionsType, AuthInitialStateType } from './types';
 
 export const SET_IS_LOGIN_IN = 'AUTH/SET_IS_LOGIN_IN';
 
-const initialState = {
+const initialState: AuthInitialStateType = {
   isLoginIn: false,
 };
 
 export const authReducer = (
-  state: InitialStateType = initialState,
+  state: AuthInitialStateType = initialState,
   action: AuthReducerActionsType,
-): InitialStateType => {
+): AuthInitialStateType => {
   switch (action.type) {
     case SET_IS_LOGIN_IN:
       return { ...state, isLoginIn: action.value };

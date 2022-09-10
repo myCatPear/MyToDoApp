@@ -1,19 +1,19 @@
-import { AppReducerActionsType, InitialStateType } from './types';
+import { AppReducerActionsType, AppInitialStateType } from './types';
 
 export const SET_APP_STATUS = 'APP/SET_APP_REQUEST_STATUS';
 export const SET_APP_ERROR = 'APP/SET_APP_ERROR';
 export const SET_IS_INITIALIZED = 'APP/SET_IS_INITIALIZED';
 
-const initialState: InitialStateType = {
+const initialState: AppInitialStateType = {
   status: 'idle',
   error: null,
   isInitialized: false,
 };
 
 export const appReducer = (
-  state: InitialStateType = initialState,
+  state: AppInitialStateType = initialState,
   action: AppReducerActionsType,
-): InitialStateType => {
+): AppInitialStateType => {
   switch (action.type) {
     case SET_APP_STATUS:
       return { ...state, status: action.status };

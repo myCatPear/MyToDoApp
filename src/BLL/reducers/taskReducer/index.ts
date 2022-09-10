@@ -1,4 +1,4 @@
-import { InitialStateType, TaskReducerActionsType } from './types';
+import { TaskInitialStateType, TaskReducerActionsType } from './types';
 
 import {
   CREATE_TODOLIST,
@@ -12,12 +12,12 @@ export const DELETE_TASKS = 'TASKS/DELETE_TASKS';
 export const UPDATE_TASKS = 'TASKS/UPDATE_TASKS';
 export const CHANGE_FILTER_TASKS = 'TASKS/CHANGE_FILTER_TASKS ';
 
-const initialState: InitialStateType = {};
+const initialState: TaskInitialStateType = {};
 
 export const taskReducer = (
-  state: InitialStateType = initialState,
+  state: TaskInitialStateType = initialState,
   action: TaskReducerActionsType,
-): InitialStateType => {
+): TaskInitialStateType => {
   switch (action.type) {
     case SET_TASKS:
       return { ...state, [action.todolistID]: action.tasks };

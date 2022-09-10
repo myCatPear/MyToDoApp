@@ -1,4 +1,4 @@
-export type { InitialStateType } from './initialStateType';
+export type { TaskInitialStateType } from './taskInitialStateType';
 export type { TaskReducerActionsType } from './taskReducerActionsTypes';
 export type { SetTasksACType } from './setTasksACType';
 export type { CreateTasksACType } from './createTasksACType';
