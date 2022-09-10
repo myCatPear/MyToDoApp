@@ -1,0 +1,10 @@
+.progress {
+  position: absolute;
+  top: 56px;
+  left: 0px;
+  width: 100%;
+  @media screen and (min-width: 600px) {
+    top: 64px;
+  }
+}
+
