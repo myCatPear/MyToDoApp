@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router-dom';
 
 import s from './App.module.scss';
 import { useAppDispatch, useAppSelector } from './common/hooks';
-import { AppCircularProgress } from './components/AppCircularProgress/AppCircularProgress';
 
 import { isInitializedTC } from 'BLL/reducers/appReducer/thunks';
 import {
@@ -12,7 +11,12 @@ import {
   PATH_TO_TODOLISTS_LIST,
   REQUEST_TO_SERVER,
 } from 'common/constants';
-import { MyAppBar, ErrorSnackBar, AppLinearProgress } from 'components';
+import {
+  MyAppBar,
+  ErrorSnackBar,
+  AppLinearProgress,
+  AppCircularProgress,
+} from 'components';
 import { Login, TodoListsList } from 'features';
 import { getAppStatus, getIsInitialized } from 'selectors';
 
